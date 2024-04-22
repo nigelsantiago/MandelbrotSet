@@ -23,12 +23,20 @@ void complexPlane::updateRender()
 
 void ComplexPlane::zoomIn()
 {
-
+    m_zoomCount++;
+    float x = BASE_WIDTH * pow(BASE_ZOOM, m_zoomCount);
+    float y = BASE_HEIGHT * m_aspectRatio * pow(BASE_ZOOM, m_zoomCount);
+    m_plane_size = (x, y);
+    m_State = CALCULATING;
 }
 
 void ComplexPlane::zoomOut()
 {
-
+    m_zoomCount--;
+    float x = BASE_WIDTH * pow(BASE_ZOOM, m_zoomCount);
+    float y = BASE_HEIGHT * m_aspectRatio * pow(BASE_ZOOM, m_zoomCount);
+    m_plane_size = (x, y);
+    m_State = CALCULATING;
 }
 
 void ComplexPlane::setCenter(Vector2i mousePixel)

@@ -33,17 +33,18 @@ void ComplexPlane::zoomOut()
 
 void ComplexPlane::setCenter(Vector2i mousePixel)
 {
-
+    m_plane_center = mapPixelToCoords(mousePixel);
+    m_State = CALCULATING;
 }
 
 void ComplexPlane::setMouseLocation(Vector2i mousePixel)
 {
-
+    m_mouseLocation = mapPixelToCoords(mousePixel);
 }
 
 void ComplexPlane::loadText(Text& text)
 {
-
+    
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)

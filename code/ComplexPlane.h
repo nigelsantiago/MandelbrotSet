@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <complex>
+#include <cmath>
 using namespace sf;
 using namespace std;
 

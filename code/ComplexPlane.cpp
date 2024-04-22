@@ -1,5 +1,9 @@
 #include "ComplexPlane.h"
+#include <iostream>
+#include <complex>
+#include <cmath>
 using namespace std;
+using namespace sf;
 
 
 ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)

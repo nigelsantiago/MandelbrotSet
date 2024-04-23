@@ -84,14 +84,7 @@ void ComplexPlane::loadText(Text& text)
          << "Cursor: (" << m_mouseLocation.x << "," << m_mouseLocation.y << ")" << endl
          << "Left-click to Zoom in" << endl << "Right-click to Zoom out" << endl;
     
-    Font font;
-    font.loadFromFile("fonts/Pixelate.ttf");
-    text.setFont(font);
     text.setString(strm.str());
-    text.setCharacterSize(45);
-    text.setPosition(1920/8.0f, 1080/8.0f);
-    text.setFillColor(Color::White);
-    text.setStyle(Text::Bold);
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)

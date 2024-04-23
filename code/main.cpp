@@ -39,9 +39,20 @@ int main()
             }
             else if (event.type == Event::MouseButtonPressed) // fill in
             {
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					zoomIn();
+					setCenter(event.mouseButton.x, event.mouseButton.y);
+				}
+				else if (event.mouseButton.button == sf::Mouse::Right)
+				{
+					zoomOut();
+					setCenter(event.mouseButton.x, event.mouseButton.y);
+				}
             }
             else if (event.type == Event::MouseeMoved) // fill in
             {
+				setMouseLocation(event.mouseMove.x, event.mouseMove.y); // needs checking
             }
             else if (Keyboard::isKeyPressed(Keyboard::Escape))
             {

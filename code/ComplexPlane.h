@@ -25,8 +25,6 @@ class ComplexPlane : public Drawable
     void ComplexPlane::setMouseLocation(Vector2i mousePixel);
     void ComplexPlane::loadText(Text& text);
 
-
-
     private:
     VertexArray m_Array;
     State m_state;

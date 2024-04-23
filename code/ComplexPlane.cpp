@@ -2,6 +2,8 @@
 #include <iostream>
 #include <complex>
 #include <cmath>
+#include <sstream>
+#include <string>
 using namespace std;
 using namespace sf;
 
@@ -77,7 +79,19 @@ void ComplexPlane::setMouseLocation(Vector2i mousePixel)
 
 void ComplexPlane::loadText(Text& text)
 {
+    ostringstream strm;
+    strm << "Mandelbrot Set" << endl << "Center: (" << m_plane_center.x << "," << m_plane_center.y << endl
+         << "Cursor: (" << m_mouseLocation.x << "," << m_mouseLocation.y << ")" << endl
+         << "Left-click to Zoom in" << endl << "Right-click to Zoom out" << endl;
     
+    Font font;
+    font.loadFromFile("fonts/Pixelate.ttf");
+    text.setFont(font);
+    text.setString(strm.str());
+    text.setCharacterSize(45);
+    text.setPosition(1920/8.0f, 1080/8.0f);
+    text.setFillColor(Color::White);
+    text.setStyle(Text::Bold);
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)

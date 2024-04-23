@@ -22,7 +22,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 
 	m_state = State::CALCULATING;
     
-	m_vArray(Points type, size_t vertexCount = 0)
+	m_vArray(Points type, size_t vertexCount = 0);
 	size_t vertexCount = pixelWidth*pixelHeight;
 	resize(vertexCount);
 	

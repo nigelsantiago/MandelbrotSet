@@ -40,16 +40,15 @@ void complexPlane::updateRender()
 	    {
 	        for (int j = 0; j < pixelWidth; ++i)
 		    {
-		        vArray[j + i * pixelWidth].position = {(float)j,(float)i};
-			m_plane_size = mapPixelToCoords(mousePixel);
-			size_t count = countIterations(mousePixel);
-
-			Uint8 r, g, b;
-
-			iterationsToRGB(count, Uint8& r, Uint8& g, Uint8& b);
-
-			vArray[j + i * pixelWidth].color = { r,g,b };
-			    
+			    vArray[j + i * pixelWidth].position = {(float)j,(float)i};
+				m_plane_size = mapPixelToCoords(mousePixel);
+				size_t count = countIterations(mousePixel);
+	
+				Uint8 r, g, b;
+	
+				iterationsToRGB(count, Uint8& r, Uint8& g, Uint8& b);
+	
+				vArray[j + i * pixelWidth].color = { r,g,b };
 		    }
 	    }
     }

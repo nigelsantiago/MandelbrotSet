@@ -97,26 +97,62 @@ void ComplexPlane::loadText(Text& text)
 
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
-
+	int count = 0;
+	float z = 0;
+	float c = pow((coord.x*coord.x + coord.y*coord.y), 0.5)
+	int i = 0;
+	while (int i < MAX_ITER && z <= 2.0)
+	{
+		z = pow(z, 2) + c;
+		i++;
+	}
+	return i;
 }
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
-{
-	count = {r, g, b};
-	
-	/* if (count == MAX_ITER)
+{	
+	if (count >= MAX_ITER) // black
 	{
-		r = 0;
+		r = 230;
 		g = 0;
-		b = 0;
+		b = 255;
 	}
-	if (count >= 0 || count < MAX_ITER)
+	else if (count < 10) // following the color scheme from canvas page for now --purple
 	{
 		r = 200;
 		g = 200;
 		b = 200;
-	} */
-	
+	}
+	else if (count < 21) // --blue
+	{
+		r = 0;
+		g = 30;
+		b = 255;
+	}
+	else if (count < 31) // --turquoise
+	{
+		r = 0;
+		g = 255;
+		b = 225;
+	}
+	else if (count < 42) // green
+	{
+		r = 0;
+		g = 255;
+		b = 98;
+	}
+	else if (count < 54) // yellow
+	{
+		r = 255;
+		g = 225;
+		b = 0;
+	}
+	else // red
+	{
+		r = 255;
+		g = 200;
+		b = 17;
+	}
 }
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)

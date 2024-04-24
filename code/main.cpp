@@ -23,8 +23,8 @@ int main()
         cout << "Error loading font file." << endl;
     }
     text.setFont(font);
-    text.setCharacterSize(45);	int i = 0;
-    text.setPosition(desktop_w/4.0f, desktop_h/4.0f);
+    text.setCharacterSize(20);
+    text.setPosition(desktop_w/17.0f, desktop_h/11.5f);
     text.setFillColor(Color::White);
     text.setStyle(Text::Bold);
 
@@ -41,18 +41,18 @@ int main()
             {
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
-					zoomIn();
-					setCenter(event.mouseButton.x, event.mouseButton.y);
+					complexPlane.zoomIn();
+					complexPlane.setCenter({event.mouseButton.x, event.mouseButton.y});
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right)
 				{
-					zoomOut();
-					setCenter(event.mouseButton.x, event.mouseButton.y);
+					complexPlane.zoomOut();
+					complexPlane.setCenter({event.mouseButton.x, event.mouseButton.y});
 				}
             }
             else if (event.type == Event::MouseMoved) // fill in
             {
-				setMouseLocation(event.mouseMove.x, event.mouseMove.y); // needs checking
+				complexPlane.setMouseLocation({event.mouseMove.x, event.mouseMove.y}); // needs checking
             }
             else if (Keyboard::isKeyPressed(Keyboard::Escape))
             {
@@ -60,8 +60,8 @@ int main()
             }
         }
         
-        updateRender();
-        loadText(text);
+        complexPlane.updateRender();
+        complexPlane.loadText(text);
         
         window.clear();
         window.draw(complexPlane);

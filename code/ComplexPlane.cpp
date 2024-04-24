@@ -38,7 +38,7 @@ void ComplexPlane::updateRender()
     {
 	    for (int i = 0; i < m_pixel_size.y; ++i)
 	    {
-	        for (int j = 0; j < m_pixel_size.x; ++i) // check: is this really ++i again?
+	        for (int j = 0; j < m_pixel_size.x; ++j) // check: is this really ++i again?
 		    {
 			    m_vArray[j + i * m_pixel_size.x].position = {(float)j,(float)i};
 				Vector2f coord = mapPixelToCoords({j, i});

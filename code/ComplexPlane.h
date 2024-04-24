@@ -26,7 +26,7 @@ class ComplexPlane : public Drawable
     void loadText(Text& text);
 
     private:
-    VertexArray m_Array;
+    VertexArray m_vArray;
     State m_state;
     Vector2f m_mouseLocation;
     Vector2i m_pixel_size;

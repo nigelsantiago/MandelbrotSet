@@ -14,16 +14,16 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	m_pixel_size.y = pixelHeight;
 
 	m_aspectRatio = static_cast<float>(pixelHeight) / pixelWidth; 
-	m_plane_center = (0,0);
+	m_plane_center = {0,0};
 
-	m_plane_size= (BASE_WIDTH, BASE_HEIGHT * m_aspectRatio);
+	m_plane_size = {BASE_WIDTH, BASE_HEIGHT * m_aspectRatio};
 
 	m_zoomCount = 0;
 
 	m_state = State::CALCULATING;
     
 	m_vArray.setPrimitiveType(Points);
-	resize(pixelWidth*pixelHeight);
+	m_vArray.resize(pixelWidth*pixelHeight);
 	
 }
 
@@ -32,23 +32,23 @@ void ComplexPlane::draw(RenderTarget& target, RenderStates states) const
 	target.draw(m_vArray);
 }
 
-void complexPlane::updateRender()
+void ComplexPlane::updateRender()
 {
-    if (m_state = CAlCULATING)
+    if (m_state == CALCULATING)
     {
-	    for (int i = 0; i < pixelHeight; ++i)
+	    for (int i = 0; i < m_pixel_size.y; ++i)
 	    {
-	        for (int j = 0; j < pixelWidth; ++i)
+	        for (int j = 0; j < m_pixel_size.x; ++i) // check: is this really ++i again?
 		    {
-			    vArray[j + i * pixelWidth].position = {(float)j,(float)i};
-				m_plane_size = mapPixelToCoords(mousePixel);
-				size_t count = countIterations(mousePixel);
+			    m_vArray[j + i * m_pixel_size.x].position = {(float)j,(float)i};
+				Vector2f coord = mapPixelToCoords({j, i});
+				size_t count = countIterations(coord);
 	
 				Uint8 r, g, b;
 	
-				iterationsToRGB(count, Uint8& r, Uint8& g, Uint8& b);
+				iterationsToRGB(count, r, g, b);
 	
-				vArray[j + i * pixelWidth].color = { r,g,b };
+				m_vArray[j + i * m_pixel_size.x].color = {r,g,b}; // replaced pixelheight/width to member function m_pixel_size
 		    }
 	    }
     }
@@ -60,8 +60,8 @@ void ComplexPlane::zoomIn()
     m_zoomCount++;
     float x = BASE_WIDTH * pow(BASE_ZOOM, m_zoomCount);
     float y = BASE_HEIGHT * m_aspectRatio * pow(BASE_ZOOM, m_zoomCount);
-    m_plane_size = (x, y);
-    m_State = CALCULATING;
+    m_plane_size = {x, y}; // no effect error means change parenthesis to curly brace
+    m_state = CALCULATING;
 }
 
 void ComplexPlane::zoomOut()
@@ -69,14 +69,14 @@ void ComplexPlane::zoomOut()
     m_zoomCount--;
     float x = BASE_WIDTH * pow(BASE_ZOOM, m_zoomCount);
     float y = BASE_HEIGHT * m_aspectRatio * pow(BASE_ZOOM, m_zoomCount);
-    m_plane_size = (x, y);
-    m_State = CALCULATING;
+    m_plane_size = {x, y};
+    m_state = CALCULATING;
 }
 
 void ComplexPlane::setCenter(Vector2i mousePixel)
 {
     m_plane_center = mapPixelToCoords(mousePixel);
-    m_State = CALCULATING;
+    m_state = CALCULATING;
 }
 
 void ComplexPlane::setMouseLocation(Vector2i mousePixel)
@@ -96,16 +96,15 @@ void ComplexPlane::loadText(Text& text)
 
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
-	int count = 0;
+	unsigned int count = 0;
 	float z = 0;
-	float c = pow((coord.x*coord.x + coord.y*coord.y), 0.5)
-	int i = 0;
-	while (int i < MAX_ITER && z <= 2.0)
+	float c = pow((coord.x*coord.x + coord.y*coord.y), 0.5);
+	while (count < MAX_ITER && z <= 2.0)
 	{
 		z = pow(z, 2) + c;
-		i++;
+		count++;
 	}
-	return i;
+	return count;
 }
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
@@ -161,8 +160,8 @@ Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 	float offset_x = m_plane_center.x - m_plane_size.x * 0.5;
 	float offset_y = m_plane_center.y - m_plane_size.y * 0.5;
 
-	newCoord.x = ((static_cast<float>(mousePixel.x) - 0) / (pixelWidth - 0)) * m_plane_size.x + offset_x;
-	newCoord.y = ((static_cast<float>(mousePixel.y) - pixelHeight) / (0 - pixelHeight)) * m_plane_size.y + offset_y;
+	newCoord.x = ((static_cast<float>(mousePixel.x) - 0) / (m_pixel_size.x - 0)) * m_plane_size.x + offset_x;
+	newCoord.y = ((static_cast<float>(mousePixel.y) - m_pixel_size.y) / (0 - m_pixel_size.y)) * m_plane_size.y + offset_y;
 
 	return newCoord;
 }

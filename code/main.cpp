@@ -23,7 +23,7 @@ int main()
         cout << "Error loading font file." << endl;
     }
     text.setFont(font);
-    text.setCharacterSize(45);
+    text.setCharacterSize(45);	int i = 0;
     text.setPosition(desktop_w/4.0f, desktop_h/4.0f);
     text.setFillColor(Color::White);
     text.setStyle(Text::Bold);
@@ -50,7 +50,7 @@ int main()
 					setCenter(event.mouseButton.x, event.mouseButton.y);
 				}
             }
-            else if (event.type == Event::MouseeMoved) // fill in
+            else if (event.type == Event::MouseMoved) // fill in
             {
 				setMouseLocation(event.mouseMove.x, event.mouseMove.y); // needs checking
             }

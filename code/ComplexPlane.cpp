@@ -13,7 +13,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	m_pixel_size.x = pixelWidth;
 	m_pixel_size.y = pixelHeight;
 
-	m_aspectRatio = pixelHeight / pixelWidth; 
+	m_aspectRatio = static_cast<float>(pixelHeight) / pixelWidth; 
 	m_plane_center = (0,0);
 
 	m_plane_size= (BASE_WIDTH, BASE_HEIGHT * m_aspectRatio);
@@ -156,5 +156,13 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 {
-    
+    Vector2f newCoord;
+
+	float offset_x = m_plane_center.x - m_plane_size.x * 0.5;
+	float offset_y = m_plane_center.y - m_plane_size.y * 0.5;
+
+	newCoord.x = ((static_cast<float>(mousePixel.x) - 0) / (pixelWidth - 0)) * m_plane_size.x + offset_x;
+	newCoord.y = ((static_cast<float>(mousePixel.y) - pixelHeight) / (0 - pixelHeight)) * m_plane_size.y + offset_y;
+
+	return newCoord;
 }

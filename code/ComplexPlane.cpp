@@ -22,9 +22,8 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 
 	m_state = State::CALCULATING;
     
-	m_vArray(Points type, size_t vertexCount = 0);
-	size_t vertexCount = pixelWidth*pixelHeight;
-	resize(vertexCount);
+	m_vArray.setPrimitiveType(Points);
+	resize(pixelWidth*pixelHeight);
 	
 }
 
@@ -103,7 +102,21 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-
+	count = {r, g, b};
+	
+	/* if (count == MAX_ITER)
+	{
+		r = 0;
+		g = 0;
+		b = 0;
+	}
+	if (count >= 0 || count < MAX_ITER)
+	{
+		r = 200;
+		g = 200;
+		b = 200;
+	} */
+	
 }
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)

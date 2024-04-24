@@ -32,7 +32,7 @@ void ComplexPlane::draw(RenderTarget& target, RenderStates states) const
 	target.draw(m_vArray);
 }
 
-void ComplexPlane::updateRender()
+void ComplexPlane::updateRender() // check displaying state location
 {
     if (m_state == CALCULATING)
     {
@@ -94,7 +94,7 @@ void ComplexPlane::loadText(Text& text)
     text.setString(strm.str());
 }
 
-size_t ComplexPlane::countIterations(Vector2f coord)
+size_t ComplexPlane::countIterations(Vector2f coord)  // verify formula used
 {
 	unsigned int count = 0;
 	float z = 0;

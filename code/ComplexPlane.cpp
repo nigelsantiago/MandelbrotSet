@@ -97,9 +97,10 @@ void ComplexPlane::loadText(Text& text)
 size_t ComplexPlane::countIterations(Vector2f coord)  // verify formula used
 {
 	unsigned int count = 0;
-	float z = 0;
-	float c = pow((coord.x*coord.x + coord.y*coord.y), 0.5);
-	while (count < MAX_ITER && z <= 2.0)
+	complex<double> c(coord.x, coord.y);
+	complex<double> z(0,0);
+
+	while (count < MAX_ITER && abs(z) <= 2.0)
 	{
 		z = pow(z, 2) + c;
 		count++;

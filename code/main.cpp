@@ -9,8 +9,8 @@ using namespace sf;
 
 int main()
 {
-    unsigned int desktop_w = VideoMode::getDesktopMode().width / 2;    //  /2
-    unsigned int desktop_h = VideoMode::getDesktopMode().height / 2;    // divided by 2 temp edit only or use sep var?
+    unsigned int desktop_w = VideoMode::getDesktopMode().width; // / 2;    //  /2
+    unsigned int desktop_h = VideoMode::getDesktopMode().height; // / 2;    // divided by 2 temp edit only or use sep var?
     VideoMode vm(desktop_w, desktop_h);
     
     RenderWindow window(vm, "Mandelbrot Set", Style::Default);

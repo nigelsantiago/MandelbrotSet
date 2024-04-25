@@ -23,7 +23,7 @@ int main()
         cout << "Error loading font file." << endl;
     }
     text.setFont(font);
-    text.setCharacterSize(20);
+    text.setCharacterSize(27);
     text.setPosition(desktop_w/17.0f, desktop_h/11.5f);
     text.setFillColor(Color::White);
     text.setStyle(Text::Bold);

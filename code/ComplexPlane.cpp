@@ -116,29 +116,29 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 		g = 0;
 		b = 0;
 	}
-	else if (count < 6) // following the color scheme from canvas page for now --purple
+	else if (count < 6) // new color scheme --orange
 	{
-		r = 230;
-		g = 0;
+		r = 255;
+		g = 128;
+		b = 20;
+	}
+	else if (count < 18) // teal
+	{
+		r = 0;
+		g = 204;
 		b = 255;
 	}
-	else if (count < 18) // --blue
+	else if (count < 29) // green
+	{
+		r = 0;
+		g = 255;
+		b = 145;
+	}
+	else if (count < 42) // blue
 	{
 		r = 0;
 		g = 30;
 		b = 255;
-	}
-	else if (count < 29) // --turquoise
-	{
-		r = 0;
-		g = 255;
-		b = 225;
-	}
-	else if (count < 42) // green
-	{
-		r = 0;
-		g = 255;
-		b = 98;
 	}
 	else if (count < 54) // yellow
 	{
